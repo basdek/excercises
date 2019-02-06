@@ -7,7 +7,6 @@ object Exercise3 extends App {
     var acc = 0
 
     for (i ← 0 until xs.length)
-
       acc += xs(i) * xs(i)
 
     acc
