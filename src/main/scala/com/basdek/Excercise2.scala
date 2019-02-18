@@ -1,3 +1,5 @@
+package com.basdek
+
 import scala.concurrent.Future
 
 object Exercise2 {
