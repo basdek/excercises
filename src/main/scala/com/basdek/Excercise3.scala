@@ -23,13 +23,20 @@ object Exercise3 extends App {
   // 2) Rewrite it using pure scala without using any var or stdlib functions
   def sumSquares3(xs : List[Int]) : Int = xs.map(x => x*x).fold(0)((acc, x) => acc+x)
 
+  def sumSquares3b(z: Int = 0)(xs : List[Int]) : Int = {
+    xs match {
+      case (Nil) => z
+      case (x :: xs) => sumSquares3b(z+x*x)(xs)
+    }
+  }
+
   // 3) What would you do if you wanted to generalize this to something that's not an Int?
   //I would use a type class, like so:
   def sumSquares4[T](xs : List[T]) (implicit n : Numeric[T]) : T =
     xs.map(x => n.times(x,x)).fold(n.zero)((acc,x) => n.plus(acc, x))
 
   val lst = List(1,2,3,4,5)
-  assert(sumSquares(lst) == sumSquares2(lst) && sumSquares(lst) == sumSquares3(lst) && sumSquares(lst) == sumSquares4(lst))
+  assert(sumSquares(lst) == sumSquares2(lst) && sumSquares(lst) == sumSquares3(lst) && sumSquares(lst) == sumSquares4(lst) && sumSquares(lst) == sumSquares3b(0)(lst))
 
 
 
